@@ -1,3 +1,27 @@
+2017-04-14  Tristan Gingold  <gingold@adacore.com> (adapted by Josh Wells <joshua.wells@gtri.gatech.edu>)
+
+	* darwin-nat.c (find_inferior_task_it): Fix indentation.
+	(find_inferior_notify_it): Remove.
+	(find_inferior_pid_it): New function.
+	(darwin_find_inferior_by_notify): Remove.
+	(darwin_find_inferior_by_pid): New function.
+	(darwin_find_new_inferior): New function.
+	(darwin_check_message_ndr): New function from
+	darwin_decode_exception_message.
+	(darwin_decode_exception_message): Call darwin_check_message_ndr.
+	Handle SIGTRAP addressed to an unknown task (when a task spawned).
+	(darwin_decode_notify_message): New function.
+	(darwin_decode_message): Handle unknown task.
+	(darwin_deallocate_threads): New function from darwin_mourn_inferior.
+	(darwin_mourn_inferior): Use darwin_deallocate_threads and
+	darwin_deallocate_exception_ports.
+	(darwin_deallocate_exception_ports): New function from
+	darwin_mourn_inferior.
+	(darwin_setup_exceptions): New function from darwin_attach_pid.
+	(darwin_setup_request_notification): Likewise.
+	(darwin_attach_pid): Call darwin_setup_request_notification and
+	darwin_setup_request_notification.
+
 2017-01-21  Joel Brobecker  <brobecker@adacore.com>
 
 	* version.in: Set GDB version number to 7.12.1.
